@@ -13,8 +13,7 @@
   </div>
 
   <!-- Item -->
-  <select class="form-select mb-2" formControlName="item" placeholder="Select Item">
-    <option value="" disabled>Select Item</option>
+  <select class="form-select mb-2" formControlName="item" placeholder="Select ">
   <option value="Boots">Boots</option>
 <option value="Helmet">Helmet</option>
 <option value="Vest">Vest</option>
@@ -31,10 +30,19 @@
     class="form-control mb-2"
     formControlName="startDate">
 
-  <div class="text-danger"
-       *ngIf="form.controls['startDate'].touched && form.controls['startDate'].invalid">
+<div class="text-danger"
+     *ngIf="form.controls['startDate'].touched && form.controls['startDate'].errors">
+
+  <div *ngIf="form.controls['startDate'].errors['required']">
     Date is required
   </div>
+
+  <div *ngIf="form.controls['startDate'].errors['futureDate']">
+    Valid future date required.
+  </div>
+
+</div>
+
 
   <!-- Error -->
   <div *ngIf="error" class="alert alert-danger mt-2">

@@ -30,7 +30,8 @@ const EQUIPMENT_HISTORY_DATA: EquipmentHistory[] = [
     date: '2025-01-01',
     //returnDate: null
   },
-  {
+ 
+    {
     employeeId: 'E001',
     employeeName: 'John Doe',
     itemId: 'BOOT-04',
@@ -38,6 +39,79 @@ const EQUIPMENT_HISTORY_DATA: EquipmentHistory[] = [
     status: 'Returned',
     date: '2024-12-15',
     returnDate: '2024-12-20'
+  },
+   {
+    employeeId: 'E004',
+    employeeName: 'Steve Brawn',
+    itemId: 'BOOT-04',
+    itemType: 'Boots',
+    status: 'Returned',
+    date: '2024-12-15',
+    returnDate: '2025-12-20'
+  },
+     {
+    employeeId: 'E005',
+    employeeName: 'Mahesh Vankar',
+    itemId: 'VEST-03',
+    itemType: 'Vest',
+    status: 'Returned',
+    date: '2024-12-15',
+    returnDate: '2025-12-20'
+  },
+    {
+    employeeId: 'E001',
+    employeeName: 'John Doe',
+    itemId: 'BOOT-01',
+    itemType: 'Boots',
+    status: 'Returned',
+    date: '2025-01-05',
+    returnDate: '2025-01-10'
+  },
+  {
+    employeeId: 'E002',
+    employeeName: 'Jane Smith',
+    itemId: 'HELM-02',
+    itemType: 'Helmet',
+    status: 'Pending',
+    date: '2025-01-12',
+    //returnDate: null
+  },
+  {
+    employeeId: 'E003',
+    employeeName: 'Mike Brown',
+    itemId: 'VEST-03',
+    itemType: 'Vest',
+    status: 'Overdue',
+    date: '2025-01-01',
+    //returnDate: null
+  },
+ 
+    {
+    employeeId: 'E001',
+    employeeName: 'John Doe',
+    itemId: 'BOOT-04',
+    itemType: 'Boots',
+    status: 'Returned',
+    date: '2024-12-15',
+    returnDate: '2024-12-20'
+  },
+   {
+    employeeId: 'E004',
+    employeeName: 'Steve Brawn',
+    itemId: 'BOOT-04',
+    itemType: 'Boots',
+    status: 'Returned',
+    date: '2024-12-15',
+    returnDate: '2025-12-20'
+  },
+     {
+    employeeId: 'E005',
+    employeeName: 'Mahesh Vankar',
+    itemId: 'VEST-03',
+    itemType: 'Vest',
+    status: 'Returned',
+    date: '2024-12-15',
+    returnDate: '2025-12-20'
   }
 ];
 

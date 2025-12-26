@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api';
 import { EquipmentHistory } from '../../models/equipment-history.model';
 
-type SortColumn = 'date' | 'itemId' | 'status' | 'returnDate';
+type SortColumn = 'date' | 'itemId' | 'status' | 'returnDate' | 'employeeName' | 'employeeId';
 
 @Component({
   standalone: true,

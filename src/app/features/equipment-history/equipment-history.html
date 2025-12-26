@@ -75,9 +75,8 @@
 
 
    <!-- Empty state -->
-<div *ngIf="!loading && filtered.length === 0"
-     class="alert alert-info text-center">
-  No equipment history found.
+<div *ngIf="!loading && filtered.length === 0">
+  No equipment history found
 </div>
 
 <!-- Table -->
@@ -100,6 +99,8 @@
       <table class="table table-striped">
         <thead class="table-light sticky-top">
           <tr>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
             <th>Date</th>
             <th>Item</th>
             <th>Status</th>
@@ -109,6 +110,8 @@
 
         <tbody>
           <tr *ngFor="let row of paged">
+            <td>{{ row.employeeId }}</td>
+            <td>{{ row.employeeName }}</td>
             <td>{{ row.date }}</td>
             <td>{{ row.itemId }}</td>
             <td>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ApiService } from '../../services/api';
 
 @Component({
@@ -9,6 +9,7 @@ import { ApiService } from '../../services/api';
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './reservation-create.html'
 })
+
 export class ReservationCreate {
 
   form: FormGroup;
@@ -24,8 +25,9 @@ export class ReservationCreate {
 this.form = this.fb.group({
   employeeId: ['', Validators.required],
   item: ['', Validators.required],
-  startDate: ['', Validators.required]
+  startDate: ['', [Validators.required, futureDateValidator]]
 });
+
 
   }
 
@@ -55,4 +57,16 @@ onSubmit(): void {
   });
 }
 
+}
+
+export function futureDateValidator(control: AbstractControl): ValidationErrors | null {
+  if (!control.value) return null;
+
+  const selected = new Date(control.value);
+  selected.setHours(0, 0, 0, 0);
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  return selected > today ? null : { futureDate: true };
 }
