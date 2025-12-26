@@ -1,0 +1,18 @@
+<nav class="navbar navbar-dark bg-dark px-3">
+  <span class="navbar-brand">SWES</span>
+
+  <ul class="navbar-nav flex-row gap-3">
+    <li class="nav-item"><a routerLink="/reserve" class="nav-link">Create Reservation</a></li>
+    <li class="nav-item"><a routerLink="/history" class="nav-link">Equipment History</a></li>
+    <li class="nav-item"><a routerLink="/calendar" class="nav-link">Calendar</a></li>
+    <li class="nav-item"><a routerLink="/notify" class="nav-link">Notify</a></li>
+  </ul>
+</nav>
+
+<main class="container-fluid">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="text-center py-3">
+  SWES Assessment © 2025
+</footer>

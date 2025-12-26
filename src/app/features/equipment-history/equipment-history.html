@@ -1,0 +1,183 @@
+<div class="container mt-4">
+
+  <h4 class="mb-3">Equipment History</h4>
+
+  <!-- ================= FILTER BAR (ALWAYS VISIBLE) ================= -->
+  <div class="row g-2 mb-3">
+
+    <div class="col-md-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search employee or item"
+        (input)="onSearch($any($event.target).value)">
+    </div>
+
+    <div class="col-md-2">
+      <select
+        class="form-select"
+        (change)="onItemTypeChange($any($event.target).value)">
+        <option value="">All items</option>
+        <option value="Boots">Boots</option>
+        <option value="Helmet">Helmet</option>
+        <option value="Vest">Vest</option>
+      </select>
+    </div>
+
+    <div class="col-md-2">
+      <input
+        type="date"
+        class="form-control"
+        (change)="onStartDateChange($any($event.target).value)">
+    </div>
+
+    <div class="col-md-2">
+      <input
+        type="date"
+        class="form-control"
+        (change)="onEndDateChange($any($event.target).value)">
+    </div>
+
+  </div>
+
+  <!-- ================= STATUS FILTERS (ALWAYS VISIBLE) ================= -->
+  <div class="mb-3">
+    <label class="me-3">
+      <input
+        type="checkbox"
+        (change)="onStatusToggle('Returned', $any($event.target).checked)">
+      Returned
+    </label>
+
+    <label class="me-3">
+      <input
+        type="checkbox"
+        (change)="onStatusToggle('Pending', $any($event.target).checked)">
+      Pending
+    </label>
+
+    <label>
+      <input
+        type="checkbox"
+        (change)="onStatusToggle('Overdue', $any($event.target).checked)">
+      Overdue
+    </label>
+  </div>
+
+  <!-- Loading -->
+<div *ngIf="loading" class="text-center my-4">
+  <div class="spinner-border"></div>
+</div>
+<!-- ERROR -->
+<div *ngIf="error" class="alert alert-danger mt-2">
+  {{ error }}
+</div>
+
+
+   <!-- Empty state -->
+<div *ngIf="!loading && filtered.length === 0"
+     class="alert alert-info text-center">
+  No equipment history found.
+</div>
+
+<!-- Table -->
+<div *ngIf="!loading && filtered.length > 0">
+  <!-- table/cards here -->
+</div>
+
+
+
+  <!-- ================= CONTENT ================= -->
+  <ng-container *ngIf="!loading">
+
+
+
+
+    <!-- DESKTOP TABLE -->
+    <div class="table-responsive d-none d-md-block"
+         *ngIf="filtered.length > 0">
+
+      <table class="table table-striped">
+        <thead class="table-light sticky-top">
+          <tr>
+            <th>Date</th>
+            <th>Item</th>
+            <th>Status</th>
+            <th>Return Date</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let row of paged">
+            <td>{{ row.date }}</td>
+            <td>{{ row.itemId }}</td>
+            <td>
+              <span
+                class="badge"
+                [class.bg-success]="row.status === 'Returned'"
+                [class.bg-warning]="row.status === 'Pending'"
+                [class.bg-danger]="row.status === 'Overdue'">
+                {{ row.status }}
+              </span>
+            </td>
+            <td>{{ row.returnDate || '-' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- MOBILE CARDS -->
+    <div class="d-md-none"
+         *ngIf="filtered.length > 0">
+
+      <div class="card mb-2" *ngFor="let row of paged">
+        <div class="card-body">
+          <h6 class="card-title">{{ row.itemId }}</h6>
+          <p><strong>Date:</strong> {{ row.date }}</p>
+          <p>
+            <strong>Status:</strong>
+            <span
+              class="badge"
+              [class.bg-success]="row.status === 'Returned'"
+              [class.bg-warning]="row.status === 'Pending'"
+              [class.bg-danger]="row.status === 'Overdue'">
+              {{ row.status }}
+            </span>
+          </p>
+          <p><strong>Return:</strong> {{ row.returnDate || '-' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="d-flex justify-content-between align-items-center mt-3"
+         *ngIf="filtered.length > 0">
+
+      <select
+        class="form-select w-auto"
+        (change)="onPageSizeChange($any($event.target).value)">
+        <option [value]="10">10</option>
+        <option [value]="25">25</option>
+        <option [value]="50">50</option>
+      </select>
+
+      <div>
+        <button
+          class="btn btn-outline-secondary btn-sm me-1"
+          [disabled]="page === 1"
+          (click)="goToPage(page - 1)">
+          Prev
+        </button>
+
+        <button
+          class="btn btn-outline-secondary btn-sm"
+          [disabled]="page * pageSize >= filtered.length"
+          (click)="goToPage(page + 1)">
+          Next
+        </button>
+      </div>
+    </div>
+
+  </ng-container>
+
+</div>

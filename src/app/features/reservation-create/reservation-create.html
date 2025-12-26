@@ -1,0 +1,56 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-3">
+
+  <!-- Employee ID -->
+  <input
+    type="text"
+    class="form-control mb-2"
+    placeholder="Employee ID"
+    formControlName="employeeId">
+
+  <div class="text-danger"
+      *ngIf="form.controls['employeeId'].touched && form.controls['employeeId'].invalid">
+    Employee ID is required
+  </div>
+
+  <!-- Item -->
+  <select class="form-select mb-2" formControlName="item" placeholder="Select Item">
+    <option value="" disabled>Select Item</option>
+  <option value="Boots">Boots</option>
+<option value="Helmet">Helmet</option>
+<option value="Vest">Vest</option>
+  </select>
+
+  <div class="text-danger"
+       *ngIf="form.controls['item'].touched && form.controls['item'].invalid">
+    Item selection is required
+  </div>
+
+  <!-- Date -->
+  <input
+    type="date"
+    class="form-control mb-2"
+    formControlName="startDate">
+
+  <div class="text-danger"
+       *ngIf="form.controls['startDate'].touched && form.controls['startDate'].invalid">
+    Date is required
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="error" class="alert alert-danger mt-2">
+    {{ error }}
+  </div>
+
+  <!-- Success -->
+  <div *ngIf="success" class="alert alert-success mt-2">
+    Reservation created successfully.
+  </div>
+
+  <!-- Submit -->
+  <button type="submit"
+          class="btn btn-primary"
+          [disabled]="loading">
+    {{ loading ? 'Submitting...' : 'Reserve' }}
+  </button>
+
+</form>
