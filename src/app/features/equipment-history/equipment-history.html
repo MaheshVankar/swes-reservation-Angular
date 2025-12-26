@@ -3,7 +3,8 @@
   <h4 class="mb-3">Equipment History</h4>
 
   <!-- ================= FILTER BAR (ALWAYS VISIBLE) ================= -->
-  <div class="row g-2 mb-3">
+   <div class="mb-3">
+  <div class="row g-2 mb-3 col-md-12">
 
     <div class="col-md-3">
       <input
@@ -37,11 +38,8 @@
         class="form-control"
         (change)="onEndDateChange($any($event.target).value)">
     </div>
-
-  </div>
-
-  <!-- ================= STATUS FILTERS (ALWAYS VISIBLE) ================= -->
-  <div class="mb-3">
+ <!-- ================= STATUS FILTERS (ALWAYS VISIBLE) ================= -->
+  <div class="align-items-center d-flex justify-content-end col-md-3">
     <label class="me-3">
       <input
         type="checkbox"
@@ -62,6 +60,10 @@
         (change)="onStatusToggle('Overdue', $any($event.target).checked)">
       Overdue
     </label>
+  </div>
+  </div>
+ 
+
   </div>
 
   <!-- Loading -->
@@ -93,41 +95,47 @@
 
 
     <!-- DESKTOP TABLE -->
-    <div class="table-responsive d-none d-md-block"
-         *ngIf="filtered.length > 0">
+<!-- DESKTOP TABLE -->
+<div
+  #tableWrapper
+  class="table-wrapper d-none d-md-block"
+  *ngIf="filtered.length > 0">
 
-      <table class="table table-striped">
-        <thead class="table-light sticky-top">
-          <tr>
-            <th>Employee ID</th>
-            <th>Employee Name</th>
-            <th>Date</th>
-            <th>Item</th>
-            <th>Status</th>
-            <th>Return Date</th>
-          </tr>
-        </thead>
+  <div class="table-responsive">
+    <table class="table table-striped mb-0">
+      <thead class="table-light sticky-top">
+        <tr>
+          <th>Employee ID</th>
+          <th>Employee Name</th>
+          <th>Date</th>
+          <th>Item</th>
+          <th>Status</th>
+          <th>Return Date</th>
+        </tr>
+      </thead>
 
-        <tbody>
-          <tr *ngFor="let row of paged">
-            <td>{{ row.employeeId }}</td>
-            <td>{{ row.employeeName }}</td>
-            <td>{{ row.date }}</td>
-            <td>{{ row.itemId }}</td>
-            <td>
-              <span
-                class="badge"
-                [class.bg-success]="row.status === 'Returned'"
-                [class.bg-warning]="row.status === 'Pending'"
-                [class.bg-danger]="row.status === 'Overdue'">
-                {{ row.status }}
-              </span>
-            </td>
-            <td>{{ row.returnDate || '-' }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <tbody>
+        <tr *ngFor="let row of paged">
+          <td>{{ row.employeeId }}</td>
+          <td>{{ row.employeeName }}</td>
+          <td>{{ row.date }}</td>
+          <td>{{ row.itemId }}</td>
+          <td>
+            <span
+              class="badge"
+              [class.bg-success]="row.status === 'Returned'"
+              [class.bg-warning]="row.status === 'Pending'"
+              [class.bg-danger]="row.status === 'Overdue'">
+              {{ row.status }}
+            </span>
+          </td>
+          <td>{{ row.returnDate || '-' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 
     <!-- MOBILE CARDS -->
     <div class="d-md-none"

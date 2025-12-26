@@ -12,12 +12,13 @@
     Employee ID is required
   </div>
 
-  <!-- Item -->
-  <select class="form-select mb-2" formControlName="item" placeholder="Select ">
+<select class="form-select mb-2" formControlName="item">
+  <option value="" disabled selected>Select Item</option>
   <option value="Boots">Boots</option>
-<option value="Helmet">Helmet</option>
-<option value="Vest">Vest</option>
-  </select>
+  <option value="Helmet">Helmet</option>
+  <option value="Vest">Vest</option>
+</select>
+
 
   <div class="text-danger"
        *ngIf="form.controls['item'].touched && form.controls['item'].invalid">

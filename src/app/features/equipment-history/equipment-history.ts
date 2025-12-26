@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,   AfterViewInit,
+  ElementRef,
+  HostListener,
+  ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api';
 import { EquipmentHistory } from '../../models/equipment-history.model';
@@ -9,9 +12,37 @@ type SortColumn = 'date' | 'itemId' | 'status' | 'returnDate' | 'employeeName' |
   standalone: true,
   selector: 'app-equipment-history',
   imports: [CommonModule],
-  templateUrl: './equipment-history.html'
+  templateUrl: './equipment-history.html',
+  styleUrls: ['./equipment-history.scss']
 })
-export class EquipmentHistoryView implements OnInit {
+export class EquipmentHistoryView implements AfterViewInit  {
+  @ViewChild('tableWrapper') tableWrapper!: ElementRef<HTMLDivElement>;
+ngAfterViewInit(): void {
+  setTimeout(() => {
+    this.adjustTableHeight();
+  });
+}
+@HostListener('window:resize')
+onResize() {
+  this.adjustTableHeight();
+}
+
+private adjustTableHeight(): void {
+  if (!this.tableWrapper) return;
+
+  const wrapper = this.tableWrapper.nativeElement;
+
+  const viewportHeight = window.innerHeight;
+  const topOffset = wrapper.getBoundingClientRect().top;
+
+  // Space for pagination + padding
+  const bottomBuffer = 140;
+
+  const availableHeight = viewportHeight - topOffset - bottomBuffer;
+
+  wrapper.style.maxHeight = `${availableHeight}px`;
+}
+
 
   all: EquipmentHistory[] = [];
   filtered: EquipmentHistory[] = [];
@@ -118,6 +149,7 @@ ngOnInit() {
 applyPagination() {
   const start = (this.page - 1) * this.pageSize;
   this.paged = this.filtered.slice(start, start + this.pageSize);
+  setTimeout(() => this.adjustTableHeight());
 
   console.log('PAGE SIZE', this.pageSize);
   console.log('PAGED DATA', this.paged);
