@@ -1,1 +1,23 @@
-<p>availability-calendar works!</p>
+<div class="container mt-4">
+
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <button class="btn btn-outline-secondary" (click)="prevMonth()">Prev</button>
+    <h5 class="mb-0">{{ monthLabel }}</h5>
+    <button class="btn btn-outline-secondary" (click)="nextMonth()">Next</button>
+  </div>
+
+  <!-- Calendar Grid -->
+  <div class="calendar-grid">
+    <div
+      *ngFor="let d of days"
+      class="calendar-day"
+      [class.available]="d.available"
+      [class.unavailable]="!d.available"
+      (click)="selectDay(d)"
+    >
+      {{ d.day }}
+    </div>
+  </div>
+
+</div>

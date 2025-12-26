@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ApiService } from '../../services/api';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -20,7 +21,8 @@ export class ReservationCreate {
 
   constructor(
     private fb: FormBuilder,
-    private api: ApiService
+    private api: ApiService,
+  private route: ActivatedRoute
   ) {
 this.form = this.fb.group({
   employeeId: ['', Validators.required],
@@ -30,6 +32,12 @@ this.form = this.fb.group({
 
 
   }
+  ngOnInit() {
+  const date = this.route.snapshot.queryParamMap.get('date');
+  if (date) {
+    this.form.patchValue({ startDate: date });
+  }
+}
 
 onSubmit(): void {
   // Reset UI state on every submit

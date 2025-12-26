@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';                 // USED
 import { Shell } from './layout/shell/shell';             // USED
 import { ReservationCreate } from './features/reservation-create/reservation-create'; // USED
 import { EquipmentHistoryView } from './features/equipment-history/equipment-history'; // USED
-import { AvailabilityCalendar } from './features/availability-calendar/availability-calendar'; // USED
+import { AvailabilityCalendarView } from './features/availability-calendar/availability-calendar'; // USED
 import { EmailNotification } from './features/email-notification/email-notification'; // USED
 export const routes: Routes = [
   {
@@ -12,7 +12,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'reserve', pathMatch: 'full' },
       { path: 'reserve', component: ReservationCreate },
       { path: 'history', component: EquipmentHistoryView },
-      { path: 'calendar', component: AvailabilityCalendar },
+      { path: 'calendar', component: AvailabilityCalendarView },
       { path: 'notify', component: EmailNotification },
     ]
   }
