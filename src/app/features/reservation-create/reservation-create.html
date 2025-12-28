@@ -1,65 +1,98 @@
+<h4 class="mt-5">Create Reservation</h4>
+<div class="mt-3">
+  <div class="border rounded p-4">
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-3">
 
   <!-- Employee ID -->
+   <div class="mb-3"  aria-live="polite" aria-atomic="true">
+   <label class="form-label">Employee Unique ID</label>
   <input
     type="text"
-    class="form-control mb-2"
-    placeholder="Employee ID"
-    formControlName="employeeId">
-
-  <div class="text-danger"
-      *ngIf="form.controls['employeeId'].touched && form.controls['employeeId'].invalid">
+    class="form-control mb-1"
+    placeholder=""
+    formControlName="employeeId"
+    id="accemployeeId"
+  />
+   <div
+    class="text-danger mb-3"
+    *ngIf="form.controls['employeeId'].touched && form.controls['employeeId'].invalid" aria-labelledby="accemployeeId" >
     Employee ID is required
   </div>
+  </div>
+ 
 
-<select class="form-select mb-2" formControlName="item">
-  <option value="" disabled selected>Select Item</option>
-  <option value="Boots">Boots</option>
-  <option value="Helmet">Helmet</option>
-  <option value="Vest">Vest</option>
-</select>
-
-
-  <div class="text-danger"
-       *ngIf="form.controls['item'].touched && form.controls['item'].invalid">
+  <!-- Item -->
+    <div class="mb-3"  aria-live="polite" aria-atomic="true">
+   <label for="item" class="form-label">Select Item</label>
+  <select class="form-select mb-1" formControlName="item">
+    <!-- <option value="" disabled>Select Item</option> -->
+    <option value="Boots">Boots</option>
+    <option value="Helmet">Helmet</option>
+    <option value="Vest">Vest</option>
+  </select>
+  <div
+    class="text-danger mb-3"
+    *ngIf="form.controls['item'].touched && form.controls['item'].invalid">
     Item selection is required
   </div>
-
-  <!-- Date -->
-  <input
-    type="date"
-    class="form-control mb-2"
-    formControlName="startDate">
-
-<div class="text-danger"
-     *ngIf="form.controls['startDate'].touched && form.controls['startDate'].errors">
-
-  <div *ngIf="form.controls['startDate'].errors['required']">
-    Date is required
   </div>
 
-  <div *ngIf="form.controls['startDate'].errors['futureDate']">
-    Valid future date required.
+  <!-- Reservation Date -->
+   <div class="mb-3"  aria-live="polite" aria-atomic="true">
+   <label for="reservationDate" class="form-label">Select Date</label>
+  <div class="input-group mb-1">
+    <input
+      type="date"
+      class="form-control"
+      formControlName="reservationDate"
+      placeholder=""
+    />
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="openCalendarModal()">
+      Availability Calender
+    </button>
+  </div>
+  </div>
+  <div
+    class="text-danger mb-3"
+    *ngIf="form.controls['reservationDate'].touched &&
+           form.controls['reservationDate'].invalid">
+    Reservation date is required
   </div>
 
-</div>
-
-
-  <!-- Error -->
-  <div *ngIf="error" class="alert alert-danger mt-2">
-    {{ error }}
-  </div>
-
-  <!-- Success -->
-  <div *ngIf="success" class="alert alert-success mt-2">
+  <!-- Success Alert -->
+  <div
+    *ngIf="success"
+    class="alert alert-success w-100 mb-4">
     Reservation created successfully.
   </div>
 
   <!-- Submit -->
-  <button type="submit"
-          class="btn btn-primary"
-          [disabled]="loading">
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="loading">
     {{ loading ? 'Submitting...' : 'Reserve' }}
   </button>
 
 </form>
+
+<!-- Calendar Modal -->
+<ng-template #calendarModalContent let-modal>
+  <div class="modal-header text-bg-dark">
+    <h4 class="modal-title">Select Reservation Date</h4>
+    <button type="button" class="btn-close btn-close-white" (click)="modal.dismiss()"></button>
+  </div>
+
+  <div class="modal-body">
+    <app-availability-calendar
+      [year]="calendarYear"
+      [month]="calendarMonth"
+      (dateSelected)="onReservationDateSelected($event); modal.close()">
+    </app-availability-calendar>
+  </div>
+</ng-template>
+</div>
+</div>

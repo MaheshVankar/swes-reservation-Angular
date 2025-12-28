@@ -1,30 +1,38 @@
 import { Component, OnInit,   AfterViewInit,
   ElementRef,
   HostListener,
-  ViewChild } from '@angular/core';
+  ViewChild, TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api';
 import { EquipmentHistory } from '../../models/equipment-history.model';
+import { ReservationCreate } from '../reservation-create/reservation-create';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Import NgbModal and NgbModule
 
 type SortColumn = 'date' | 'itemId' | 'status' | 'returnDate' | 'employeeName' | 'employeeId';
 
 @Component({
   standalone: true,
   selector: 'app-equipment-history',
-  imports: [CommonModule],
+  imports: [CommonModule, ReservationCreate, NgbModule], // Add NgbModule here
   templateUrl: './equipment-history.html',
   styleUrls: ['./equipment-history.scss']
 })
 export class EquipmentHistoryView implements AfterViewInit  {
   @ViewChild('tableWrapper') tableWrapper!: ElementRef<HTMLDivElement>;
+  @ViewChild('modalContent') modalContent!: TemplateRef<any>; // Reference to ng-template
+
 ngAfterViewInit(): void {
   setTimeout(() => {
     this.adjustTableHeight();
-  });
+  }, 1500);
 }
 @HostListener('window:resize')
 onResize() {
   this.adjustTableHeight();
+}
+
+openReservationModal() {
+  this.modalService.open(this.modalContent, { ariaLabelledBy: 'modal-basic-title' });
 }
 
 private adjustTableHeight(): void {
@@ -41,6 +49,7 @@ private adjustTableHeight(): void {
   const availableHeight = viewportHeight - topOffset - bottomBuffer;
 
   wrapper.style.maxHeight = `${availableHeight}px`;
+  wrapper.style.overflowY = 'auto';
 }
 
 
@@ -68,7 +77,7 @@ private adjustTableHeight(): void {
   page = 1;
   pageSize = 10;
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private modalService: NgbModal) {}
 
 ngOnInit() {
   this.loading = true;
@@ -76,18 +85,23 @@ ngOnInit() {
   this.filtered = [];
   this.paged = [];
 
-  this.api.getEquipmentHistory().subscribe({
-    next: (data: EquipmentHistory[]) => {
-      this.all = data;
-      this.page = 1;
-      this.applyFilters();
-      this.loading = false;
-    },
-    error: () => {
-      this.loading = false;
-      this.error = 'Failed to load equipment history.';
-    }
-  });
+this.api.getEquipmentHistory().subscribe({
+  next: (data: EquipmentHistory[]) => {
+    this.all = data;
+    this.page = 1;
+    this.applyFilters();
+    this.loading = false;
+
+    // ✅ WAIT FOR TABLE TO RENDER, THEN CALCULATE
+    setTimeout(() => {
+      this.adjustTableHeight();
+    });
+  },
+  error: () => {
+    this.loading = false;
+    this.error = 'Failed to load equipment history.';
+  }
+});
 }
 
 

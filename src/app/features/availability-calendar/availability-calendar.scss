@@ -1,24 +1,17 @@
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 12px;
+  gap: 8px;
 }
 
 .calendar-day {
-  padding: 14px;
-  text-align: center;
-  border-radius: 6px;
-  font-weight: 500;
-}
-
-.calendar-day.available {
-  background-color: #d4edda;
-  color: #155724;
+  padding: 8px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-.calendar-day.unavailable {
-  background-color: #f8d7da;
-  color: #721c24;
+.calendar-day.disabled {
+  background: #e0e0e0;
+  color: #999;
   cursor: not-allowed;
 }

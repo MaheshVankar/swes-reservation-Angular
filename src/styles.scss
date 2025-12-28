@@ -1,5 +1,28 @@
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+body, .modal-content, table thead.sticky-top th, .table > :not(caption) > * > * {
+background: #212529 !important;
+color: #dee2e6;
+}
 table thead.sticky-top th {
   background: #f8f9fa;
   z-index: 1;
 }
-/* You can add global styles to this file, and also import other style files */
+input.form-control, select.form-select {
+  border-color: #495057;
+  background: #212529;
+  color: #737373;
+
+}
+
+
+input.form-control::placeholder{
+  color: #737373;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* Inverts the colors, turning black to white */
+}

@@ -1,80 +1,74 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { ApiService } from '../../services/api';
-import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { AvailabilityCalendar } from '../availability-calendar/availability-calendar';
 
 @Component({
-  standalone: true,
   selector: 'app-reservation-create',
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './reservation-create.html'
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    AvailabilityCalendar
+  ],
+  templateUrl: './reservation-create.html',
+  styleUrls: ['./reservation-create.scss']
 })
-
 export class ReservationCreate {
+
+  @ViewChild('calendarModalContent') calendarModalContent!: TemplateRef<any>;
 
   form: FormGroup;
 
+  calendarYear = new Date().getFullYear();
+  calendarMonth = new Date().getMonth();
+
   loading = false;
   success = false;
-  error: string | null = null;
 
   constructor(
     private fb: FormBuilder,
-    private api: ApiService,
-  private route: ActivatedRoute
+    private modalService: NgbModal
   ) {
-this.form = this.fb.group({
-  employeeId: ['', Validators.required],
-  item: ['', Validators.required],
-  startDate: ['', [Validators.required, futureDateValidator]]
-});
-
-
+    this.form = this.fb.group({
+      employeeId: ['', Validators.required],
+      item: ['', Validators.required],
+      reservationDate: ['', Validators.required]
+    });
   }
-  ngOnInit() {
-  const date = this.route.snapshot.queryParamMap.get('date');
-  if (date) {
-    this.form.patchValue({ startDate: date });
-  }
-}
 
-onSubmit(): void {
-  // Reset UI state on every submit
-  this.error = null;
+  openCalendarModal(): void {
+    this.modalService.open(this.calendarModalContent, {
+      size: 'lg',
+      centered: true
+    });
+  }
+
+  onReservationDateSelected(date: string): void {
+    this.form.patchValue({ reservationDate: date });
+    this.form.get('reservationDate')?.markAsTouched();
+  }
+
+  onSubmit(): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched(); // 🔴 THIS IS ESSENTIAL
+      return;
+    }
+  this.loading = true;
   this.success = false;
 
-  // 🔴 THIS IS THE KEY FIX
-  if (this.form.invalid) {
-    this.form.markAllAsTouched();
-    return;
+  setTimeout(() => {
+    this.loading = false;
+    this.success = true;
+
+    // ✅ RESET WITH DEFAULTS
+    this.form.reset({
+      employeeId: '',
+      item: '',
+      reservationDate: ''
+    });
+  }, 800);
   }
-
-  this.loading = true;
-
-  this.api.createReservation(this.form.value).subscribe({
-    next: () => {
-      this.loading = false;
-      this.success = true;
-      this.form.reset();
-    },
-    error: () => {
-      this.loading = false;
-      this.error = 'Failed to create reservation.';
-    }
-  });
-}
-
-}
-
-export function futureDateValidator(control: AbstractControl): ValidationErrors | null {
-  if (!control.value) return null;
-
-  const selected = new Date(control.value);
-  selected.setHours(0, 0, 0, 0);
-
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  return selected > today ? null : { futureDate: true };
 }

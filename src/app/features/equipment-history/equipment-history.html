@@ -1,10 +1,15 @@
 <div class="container mt-4">
 
+  <div class="d-flex justify-content-between align-items-center">
   <h4 class="mb-3">Equipment History</h4>
+  <button type="button" class="btn btn-primary" (click)="openReservationModal()">
+    Create Reservation
+  </button>
+</div>
 
   <!-- ================= FILTER BAR (ALWAYS VISIBLE) ================= -->
    <div class="mb-3">
-  <div class="row g-2 mb-3 col-md-12">
+  <div class="row g-2 mb-3 col-md-12 mt-3">
 
     <div class="col-md-3">
       <input
@@ -98,11 +103,11 @@
 <!-- DESKTOP TABLE -->
 <div
   #tableWrapper
-  class="table-wrapper d-none d-md-block"
+  class="table-wrapper d-none d-md-block px-3 rounded" style="border: 1px solid #4d5154;"
   *ngIf="filtered.length > 0">
 
-  <div class="table-responsive">
-    <table class="table table-striped mb-0">
+  <div class="table-scroll">
+    <table class="table table-striped mb-0 table-dark">
       <thead class="table-light sticky-top">
         <tr>
           <th>Employee ID</th>
@@ -174,14 +179,14 @@
 
       <div>
         <button
-          class="btn btn-outline-secondary btn-sm me-1"
+          class="btn btn-primary btn-sm me-1"
           [disabled]="page === 1"
           (click)="goToPage(page - 1)">
           Prev
         </button>
 
         <button
-          class="btn btn-outline-secondary btn-sm"
+          class="btn btn-primary btn-sm"
           [disabled]="page * pageSize >= filtered.length"
           (click)="goToPage(page + 1)">
           Next
@@ -192,3 +197,13 @@
   </ng-container>
 
 </div>
+
+<ng-template #modalContent let-modal>
+  <div class="modal-header text-bg-dark">
+    <h4 class="modal-title" id="modal-basic-title">Create Reservation</h4>
+    <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <app-reservation-create></app-reservation-create>
+  </div>
+</ng-template>
