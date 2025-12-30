@@ -14,6 +14,7 @@ export class AvailabilityCalendar implements OnInit {
   @Input() month!: number;
 
   @Output() dateSelected = new EventEmitter<string>();
+  
 
   days: {
     day: number;

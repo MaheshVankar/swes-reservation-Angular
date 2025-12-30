@@ -25,7 +25,7 @@
     <div class="mb-3"  aria-live="polite" aria-atomic="true">
    <label for="item" class="form-label">Select Item</label>
   <select class="form-select mb-1" formControlName="item">
-    <!-- <option value="" disabled>Select Item</option> -->
+    <option value="" disabled>Select Item</option>
     <option value="Boots">Boots</option>
     <option value="Helmet">Helmet</option>
     <option value="Vest">Vest</option>
@@ -55,12 +55,20 @@
     </button>
   </div>
   </div>
-  <div
-    class="text-danger mb-3"
-    *ngIf="form.controls['reservationDate'].touched &&
-           form.controls['reservationDate'].invalid">
+<div
+  class="text-danger mb-3"
+  *ngIf="form.controls['reservationDate'].touched &&
+         form.controls['reservationDate'].invalid">
+
+  <div *ngIf="form.controls['reservationDate'].errors?.['required']">
     Reservation date is required
   </div>
+
+  <div *ngIf="form.controls['reservationDate'].errors?.['pastDate']">
+    Past dates are not allowed
+  </div>
+</div>
+
 
   <!-- Success Alert -->
   <div

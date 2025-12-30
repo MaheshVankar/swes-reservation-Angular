@@ -1,6 +1,6 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl, ValidationErrors  } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AvailabilityCalendar } from '../availability-calendar/availability-calendar';
@@ -16,6 +16,7 @@ import { AvailabilityCalendar } from '../availability-calendar/availability-cale
   templateUrl: './reservation-create.html',
   styleUrls: ['./reservation-create.scss']
 })
+
 export class ReservationCreate {
 
   @ViewChild('calendarModalContent') calendarModalContent!: TemplateRef<any>;
@@ -35,7 +36,7 @@ export class ReservationCreate {
     this.form = this.fb.group({
       employeeId: ['', Validators.required],
       item: ['', Validators.required],
-      reservationDate: ['', Validators.required]
+      reservationDate: ['', [Validators.required, noPastDate]],
     });
   }
 
@@ -71,4 +72,16 @@ export class ReservationCreate {
     });
   }, 800);
   }
+}
+export function noPastDate(control: AbstractControl): ValidationErrors | null {
+  if (!control.value) return null;
+
+  const selected = new Date(control.value);
+  const today = new Date();
+
+  // normalize to midnight
+  selected.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
+
+  return selected < today ? { pastDate: true } : null;
 }
