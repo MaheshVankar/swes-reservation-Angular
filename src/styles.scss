@@ -1,28 +1,75 @@
-
+@import './variables.scss';
 html, body {
   height: 100%;
   margin: 0;
-  overflow: hidden;
-}
-body, .modal-content, table thead.sticky-top th, .table > :not(caption) > * > * {
-background: #212529 !important;
-color: #dee2e6;
-}
-table thead.sticky-top th {
-  background: #f8f9fa;
-  z-index: 1;
-}
-input.form-control, select.form-select {
-  border-color: #495057;
-  background: #212529;
-  color: #737373;
-
+  font-size: 14px;
+  color: #11141A;
+  font-family: 'Inter', sans-serif;
 }
 
-
-input.form-control::placeholder{
-  color: #737373;
+.commoncontaineer{
+  display: grid;
+    grid-template-columns: 380px 1fr;
+    height: 100vh;
+    background: #f9fafb;
 }
-input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(1); /* Inverts the colors, turning black to white */
+/* SIDEBAR */
+.sidebar {
+  background: #f1f3f0;
+  padding: 24px;
+
+  .profile {
+    margin-bottom: 24px;
+
+    h3 {
+      margin: 4px 0;
+    }
+
+    button {
+      background: #cde89a;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+  }
+
+  .upgrade-card {
+    //background: linear-gradient(135deg, #b6e388, #8bc34a);
+    color: #3A5006;
+    padding: 28px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    background-image: url(../public/Upgrade-to-Pro.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .reminders {
+    .reminder {
+      background: #fff;
+      padding: 12px 0px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+
+      &.danger {
+       // border-left: 4px solid #e74c3c;
+      }
+
+      &.warning {
+        //border-left: 4px solid #f1c40f;
+      }
+    }
+    .see-all{
+        color: $default-primary-color;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    p{
+        color: $default-metadata-color;
+        font-size: 12px;
+        margin-bottom: 0;
+        margin-top: auto;
+    }
+  }
 }

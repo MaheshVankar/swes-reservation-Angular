@@ -103,11 +103,11 @@
 <!-- DESKTOP TABLE -->
 <div
   #tableWrapper
-  class="table-wrapper d-none d-md-block px-3 rounded" style="border: 1px solid #4d5154;"
+  class="table-wrapper d-none d-md-block px-3 rounded" 
   *ngIf="filtered.length > 0">
 
   <div class="table-scroll">
-    <table class="table table-striped mb-0 table-dark">
+    <table class="table table-striped mb-0">
       <thead class="table-light sticky-top">
         <tr>
           <th>Employee ID</th>
@@ -204,6 +204,6 @@
     <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
-    <app-reservation-create></app-reservation-create>
+    <app-reservation-create [isModal]="true"></app-reservation-create>
   </div>
 </ng-template>

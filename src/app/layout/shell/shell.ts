@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   selector: 'app-shell',
   imports: [CommonModule, RouterModule],
-  templateUrl: './shell.html'
+  templateUrl: './shell.html',
+  styleUrls: ['./shell.scss']
 })
 export class Shell {}

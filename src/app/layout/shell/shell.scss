@@ -1,0 +1,20 @@
+@use '../../../variables.scss';
+@import '../../../variables.scss';
+
+.navbar {
+    .navbar-brand{
+        color: $default-primary-color;
+        font-weight: bold;
+        font-size: 26px;
+    }
+    .nav-link {
+        &.active,
+        &:hover {
+            color: $default-primary-color !important;
+
+            svg path {
+                fill: $default-primary-color;
+            }
+        }
+    }   
+}

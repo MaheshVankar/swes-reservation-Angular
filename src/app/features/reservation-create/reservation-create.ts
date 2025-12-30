@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component, TemplateRef, ViewChild, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl, ValidationErrors  } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -18,6 +18,14 @@ import { AvailabilityCalendar } from '../availability-calendar/availability-cale
 })
 
 export class ReservationCreate {
+
+  @Input() isModal = false;
+
+  // @HostBinding('class.in-modal')
+  // get isInModal(): boolean {
+  //   return this.isModal;
+  // }
+  
 
   @ViewChild('calendarModalContent') calendarModalContent!: TemplateRef<any>;
 

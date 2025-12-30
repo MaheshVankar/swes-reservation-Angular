@@ -1,0 +1,13 @@
+@import '../../../variables.scss';
+
+.btn-primary{
+    background-color: $default-primary-color;
+    border-color: $default-primary-color;
+    color: #fff;;
+    &:hover{
+        background-color: $btn-primary-hover-color;
+        border-color: $btn-primary-hover-color;
+    ;
+    
+    }
+}

@@ -1,0 +1,90 @@
+@import '../../variables.scss';
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  height: 100vh;
+  background: #f9fafb;
+}
+
+
+
+/* MAIN CONTENT */
+.content {
+  padding: 32px;
+}
+
+/* STATS */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+
+  .stat-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #cccccc;
+
+    .stat-card-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+
+        img {
+            width: 20px;
+            //height: 40px;
+        }
+    }
+
+    h2 {
+      margin: 0;
+
+      &.danger {
+        color: #e74c3c;
+      }
+        //   &.increase {
+        //     background-image: url('data:image/svg+xml,<svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.9863 0H13.9863C13.7211 0 13.4668 0.105341 13.2792 0.292877C13.0917 0.480414 12.9863 0.734784 12.9863 1C12.9863 1.26522 13.0917 1.51956 13.2792 1.70709C13.4668 1.89463 13.7211 2 13.9863 2H14.4393L9.91733 6.19998L6.58533 3.69998C6.39995 3.56101 6.17207 3.49073 5.94062 3.50113C5.70916 3.51153 5.4885 3.60195 5.31633 3.75699L0.316325 8.25699C0.12527 8.43597 0.0120223 8.68274 0.000903198 8.94431C-0.0102159 9.20587 0.0816859 9.46136 0.256862 9.65591C0.432038 9.85047 0.676519 9.96855 0.937808 9.98483C1.1991 10.0011 1.45636 9.91428 1.65433 9.74298L6.04333 5.793L9.38632 8.29898C9.57374 8.4395 9.80454 8.50977 10.0385 8.49753C10.2724 8.48528 10.4946 8.39131 10.6663 8.23199L15.9853 3.293V3.99899C15.9853 4.26421 16.0907 4.51858 16.2782 4.70612C16.4658 4.89365 16.7201 4.99899 16.9853 4.99899C17.2505 4.99899 17.5049 4.89365 17.6924 4.70612C17.88 4.51858 17.9853 4.26421 17.9853 3.99899V0.998993C17.9851 0.734123 17.8797 0.480169 17.6924 0.292877C17.5051 0.105586 17.2512 0.000264738 16.9863 0Z" fill="%232EC114"/></svg>');
+        //   }
+    }
+  }
+}
+
+/* RESERVATIONS */
+.reservations {
+  .reservation-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .reservation-card {
+    background: #fff;
+    padding: 16px;
+    border-radius: 12px;
+
+    .status {
+      font-weight: 600;
+
+      &.pending {
+        color: #f1c40f;
+      }
+
+      &.returned {
+        color: #2ecc71;
+      }
+
+      &.overdue {
+        color: #e74c3c;
+      }
+    }
+  }
+  .nav-link{
+    color: $nav-pill-normal-color;
+    &.active{
+        border-bottom-color: $default-primary-color;
+        color: $default-body-text-color;
+    }
+  }
+}

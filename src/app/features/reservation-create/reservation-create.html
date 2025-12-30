@@ -1,106 +1,177 @@
-<h4 class="mt-5">Create Reservation</h4>
-<div class="mt-3">
-  <div class="border rounded p-4">
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-3">
+<div [ngClass]="{'commoncontaineer': !isModal}">
+  <ng-container *ngIf="!isModal" >
+    <aside class="sidebar">
+      <div class="profile">
+        <h4>Hello,</h4>
+        <h3>Martin Stufi</h3>
+      <div class="d-flex justify-content-between align-items-center">
+        <small>swes.com/martin</small>
+          <span class="copy-link-icon" style="color: #BBC5D5;"> | 
+              <svg class="ms-1" width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.219 18.035H10.969C12.0875 18.0337 13.1599 17.5888 13.9508 16.7978C14.7418 16.0069 15.1867 14.9345 15.188 13.816V8.543C15.1867 7.42446 14.7418 6.35211 13.9508 5.56118C13.1599 4.77025 12.0875 4.32532 10.969 4.324H4.219C3.10046 4.32532 2.02811 4.77025 1.23718 5.56118C0.446249 6.35211 0.00132325 7.42446 0 8.543V13.816C0.00132325 14.9345 0.446249 16.0069 1.23718 16.7978C2.02811 17.5888 3.10046 18.0337 4.219 18.035ZM10.969 5.735C11.7134 5.73658 12.4269 6.03287 12.9535 6.55907C13.4801 7.08527 13.7769 7.79858 13.779 8.543V13.816C13.7779 14.5615 13.4813 15.2761 12.9542 15.8032C12.4271 16.3303 11.7125 16.6269 10.967 16.628H4.219C3.47354 16.6269 2.75891 16.3303 2.23178 15.8032C1.70466 15.2761 1.40806 14.5615 1.407 13.816V8.543C1.40779 7.79736 1.70428 7.08248 2.23143 6.55514C2.75858 6.0278 3.47336 5.73106 4.219 5.73L10.969 5.735ZM16.594 11.288V4.219C16.5932 3.47284 16.2963 2.7575 15.7685 2.23008C15.2407 1.70265 14.5252 1.40626 13.779 1.406H7.031C6.57678 1.40643 6.1294 1.51669 5.727 1.72738C5.3246 1.93807 4.97912 2.24294 4.72 2.616C4.61391 2.76916 4.45133 2.87391 4.26801 2.9072C4.08469 2.94048 3.89566 2.89959 3.7425 2.7935C3.58934 2.68741 3.48459 2.52483 3.4513 2.34151C3.41802 2.15819 3.45891 1.96916 3.565 1.816C3.95336 1.25614 4.47143 0.798569 5.07498 0.482343C5.67853 0.166116 6.34963 0.000626527 7.031 0L13.779 0C14.8975 0.00132325 15.9699 0.446249 16.7608 1.23718C17.5518 2.02811 17.9967 3.10046 17.998 4.219V11.284C17.998 11.4704 17.9239 11.6493 17.7921 11.7811C17.6603 11.9129 17.4814 11.987 17.295 11.987C17.1086 11.987 16.9297 11.9129 16.7979 11.7811C16.6661 11.6493 16.592 11.4704 16.592 11.284L16.594 11.288Z" fill="#BBC5D5"/>
+              </svg>
+          </span>
+        <button>Edit Link</button>
+        </div>
+      </div>
 
-  <!-- Employee ID -->
-   <div class="mb-3"  aria-live="polite" aria-atomic="true">
-   <label class="form-label">Employee Unique ID</label>
-  <input
-    type="text"
-    class="form-control mb-1"
-    placeholder=""
-    formControlName="employeeId"
-    id="accemployeeId"
-  />
-   <div
-    class="text-danger mb-3"
-    *ngIf="form.controls['employeeId'].touched && form.controls['employeeId'].invalid" aria-labelledby="accemployeeId" >
-    Employee ID is required
-  </div>
-  </div>
- 
+      <div class="upgrade-card">
+        <h4 class="fs-5">Upgrade <br>to PRO</h4>
+        <p>For more profile control</p>
+      </div>
 
-  <!-- Item -->
-    <div class="mb-3"  aria-live="polite" aria-atomic="true">
-   <label for="item" class="form-label">Select Item</label>
-  <select class="form-select mb-1" formControlName="item">
-    <option value="" disabled>Select Item</option>
-    <option value="Boots">Boots</option>
-    <option value="Helmet">Helmet</option>
-    <option value="Vest">Vest</option>
-  </select>
-  <div
-    class="text-danger mb-3"
-    *ngIf="form.controls['item'].touched && form.controls['item'].invalid">
-    Item selection is required
-  </div>
-  </div>
+      <div class="reminders">
+          <div class="d-flex justify-content-between">
+              <h5>Reminders</h5>
+              <a href="#" class="see-all">View All >></a>
+          </div>
+        <div class="reminder danger d-flex">
+          <span class="me-3">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path opacity="0.3" d="M33 0H15C6.71573 0 0 6.71573 0 15V33C0 41.2843 6.71573 48 15 48H33C41.2843 48 48 41.2843 48 33V15C48 6.71573 41.2843 0 33 0Z" fill="#F35162"/>
+              <path d="M22 26.05V13H26.8V26.05H22ZM22 34.51V29.53H26.8V34.51H22Z" fill="#F35162"/>
+              </svg>
+          </span>
+          <div class="d-flex flex-wrap">
+          <b>Booking Reminder</b>
+          <p>Lorem ipsum dolor sit amet, consetetur</p>
+          </div>
+        </div>
 
-  <!-- Reservation Date -->
-   <div class="mb-3"  aria-live="polite" aria-atomic="true">
-   <label for="reservationDate" class="form-label">Select Date</label>
-  <div class="input-group mb-1">
-    <input
-      type="date"
-      class="form-control"
-      formControlName="reservationDate"
-      placeholder=""
-    />
-    <button
-      type="button"
-      class="btn btn-primary"
-      (click)="openCalendarModal()">
-      Availability Calender
-    </button>
-  </div>
-  </div>
-<div
-  class="text-danger mb-3"
-  *ngIf="form.controls['reservationDate'].touched &&
-         form.controls['reservationDate'].invalid">
+        <div class="reminder warning d-flex">
+          <span class="me-3">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path opacity="0.3" d="M33 0H15C6.71573 0 0 6.71573 0 15V33C0 41.2843 6.71573 48 15 48H33C41.2843 48 48 41.2843 48 33V15C48 6.71573 41.2843 0 33 0Z" fill="#FFA101"/>
+              <path d="M32.708 16H15.292C14.6573 16.0296 14.06 16.3091 13.6306 16.7775C13.2012 17.2458 12.9745 17.8651 13 18.5V29.5C12.9745 30.1349 13.2012 30.7542 13.6306 31.2225C14.06 31.6909 14.6573 31.9704 15.292 32H32.708C33.3427 31.9704 33.94 31.6909 34.3694 31.2225C34.7988 30.7542 35.0255 30.1349 35 29.5V18.5C35.0255 17.8651 34.7988 17.2458 34.3694 16.7775C33.94 16.3091 33.3427 16.0296 32.708 16ZM33.166 21.41L25.273 25.91C24.8845 26.1297 24.4463 26.2467 24 26.25C23.5535 26.2457 23.1153 26.1288 22.726 25.91L14.833 21.41V19.15L23.569 24.13C23.7006 24.2038 23.8491 24.2426 24 24.2426C24.1509 24.2426 24.2994 24.2038 24.431 24.13L33.167 19.15L33.166 21.41Z" fill="#FFA101"/>
+              </svg>
+          </span>
+          <div class="d-flex flex-wrap">
+          <b>New Message</b>
+          <p>Lorem ipsum dolor sit amet, consetetur</p>
+          </div>
+        </div>
 
-  <div *ngIf="form.controls['reservationDate'].errors?.['required']">
-    Reservation date is required
-  </div>
+        <div class="reminder danger d-flex">
+          <span class="me-3">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path opacity="0.3" d="M33 0H15C6.71573 0 0 6.71573 0 15V33C0 41.2843 6.71573 48 15 48H33C41.2843 48 48 41.2843 48 33V15C48 6.71573 41.2843 0 33 0Z" fill="#F35162"/>
+              <path d="M22 26.05V13H26.8V26.05H22ZM22 34.51V29.53H26.8V34.51H22Z" fill="#F35162"/>
+              </svg>
+          </span>
+          <div class="d-flex flex-wrap">
+          <b>Upcoming Booking</b>
+          <p>Lorem ipsum dolor sit amet, consetetur</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </ng-container>
+  <main class="content">
+<h4 [ngClass]="{'mt-5': !isModal}" class="">Create Reservation</h4>
+    <div class="mt-3">
+      <div class="border rounded p-4">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-3">
 
-  <div *ngIf="form.controls['reservationDate'].errors?.['pastDate']">
-    Past dates are not allowed
-  </div>
-</div>
+      <!-- Employee ID -->
+      <div class="mb-3"  aria-live="polite" aria-atomic="true">
+      <label class="form-label">Employee Unique ID</label>
+      <input
+        type="text"
+        class="form-control mb-1"
+        placeholder=""
+        formControlName="employeeId"
+        id="accemployeeId"
+      />
+      <div
+        class="text-danger mb-3"
+        *ngIf="form.controls['employeeId'].touched && form.controls['employeeId'].invalid" aria-labelledby="accemployeeId" >
+        Employee ID is required
+      </div>
+      </div>
+    
+
+      <!-- Item -->
+        <div class="mb-3"  aria-live="polite" aria-atomic="true">
+      <label for="item" class="form-label">Select Item</label>
+      <select class="form-select mb-1" formControlName="item">
+        <option value="" disabled>Select Item</option>
+        <option value="Boots">Boots</option>
+        <option value="Helmet">Helmet</option>
+        <option value="Vest">Vest</option>
+      </select>
+      <div
+        class="text-danger mb-3"
+        *ngIf="form.controls['item'].touched && form.controls['item'].invalid">
+        Item selection is required
+      </div>
+      </div>
+
+      <!-- Reservation Date -->
+      <div class="mb-3"  aria-live="polite" aria-atomic="true">
+      <label for="reservationDate" class="form-label">Select Date</label>
+      <div class="input-group mb-1">
+        <input
+          type="date"
+          class="form-control"
+          formControlName="reservationDate"
+          placeholder=""
+        />
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="openCalendarModal()">
+          Availability Calender
+        </button>
+      </div>
+      </div>
+    <div
+      class="text-danger mb-3"
+      *ngIf="form.controls['reservationDate'].touched &&
+            form.controls['reservationDate'].invalid">
+
+      <div *ngIf="form.controls['reservationDate'].errors?.['required']">
+        Reservation date is required
+      </div>
+
+      <div *ngIf="form.controls['reservationDate'].errors?.['pastDate']">
+        Past dates are not allowed
+      </div>
+    </div>
 
 
-  <!-- Success Alert -->
-  <div
-    *ngIf="success"
-    class="alert alert-success w-100 mb-4">
-    Reservation created successfully.
-  </div>
+      <!-- Success Alert -->
+      <div
+        *ngIf="success"
+        class="alert alert-success w-100 mb-4">
+        Reservation created successfully.
+      </div>
 
-  <!-- Submit -->
-  <button
-    type="submit"
-    class="btn btn-primary"
-    [disabled]="loading">
-    {{ loading ? 'Submitting...' : 'Reserve' }}
-  </button>
+      <!-- Submit -->
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="loading">
+        {{ loading ? 'Submitting...' : 'Reserve' }}
+      </button>
 
-</form>
+    </form>
 
-<!-- Calendar Modal -->
-<ng-template #calendarModalContent let-modal>
-  <div class="modal-header text-bg-dark">
-    <h4 class="modal-title">Select Reservation Date</h4>
-    <button type="button" class="btn-close btn-close-white" (click)="modal.dismiss()"></button>
-  </div>
+    <!-- Calendar Modal -->
+    <ng-template #calendarModalContent let-modal>
+      <div class="modal-header text-bg-dark">
+        <h4 class="modal-title">Select Reservation Date</h4>
+        <button type="button" class="btn-close btn-close-white" (click)="modal.dismiss()"></button>
+      </div>
 
-  <div class="modal-body">
-    <app-availability-calendar
-      [year]="calendarYear"
-      [month]="calendarMonth"
-      (dateSelected)="onReservationDateSelected($event); modal.close()">
-    </app-availability-calendar>
-  </div>
-</ng-template>
-</div>
+      <div class="modal-body">
+        <app-availability-calendar
+          [year]="calendarYear"
+          [month]="calendarMonth"
+          (dateSelected)="onReservationDateSelected($event); modal.close()">
+        </app-availability-calendar>
+      </div>
+    </ng-template>
+    </div>
+    </div>
+    </main>
 </div>
