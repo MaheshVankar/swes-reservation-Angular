@@ -1,9 +1,9 @@
 @import '../../variables.scss';
 
-.dashboard {
+.commoncontainer {
   display: grid;
   grid-template-columns: 380px 1fr;
-  height: 100vh;
+  //height: 100vh;
   background: #f9fafb;
 }
 
@@ -63,6 +63,7 @@
     background: #fff;
     padding: 16px;
     border-radius: 12px;
+    border: 1px solid #cccccc;
 
     .status {
       font-weight: 600;
@@ -86,5 +87,38 @@
         border-bottom-color: $default-primary-color;
         color: $default-body-text-color;
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .commoncontainer{
+    display: block;
+  }
+  .dashboard {
+    // grid-template-columns: 1fr;
+    // height: auto;
+  }
+
+  // .sidebar {
+  //   order: 2;
+  // }
+
+  .content {
+    order: 1;
+    padding: 16px;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .reservations .reservation-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .stats {
+    grid-template-columns: 1fr;
   }
 }

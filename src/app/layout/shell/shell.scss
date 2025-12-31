@@ -2,6 +2,9 @@
 @import '../../../variables.scss';
 
 .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     .navbar-brand{
         color: $default-primary-color;
         font-weight: bold;
@@ -17,4 +20,30 @@
             }
         }
     }   
+}
+
+.navbar-toggler{
+    border: none;
+    background: transparent;
+}
+
+@media (max-width: 768px) {
+  .navbar-nav {
+    display: none;
+    flex-direction: column !important;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: #fff;
+    width: 100%;
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+    &.show-menu {
+      display: flex;
+      z-index: 10;
+    }
+    .nav-item {
+        margin-bottom: 10px;
+    }
+  }
 }

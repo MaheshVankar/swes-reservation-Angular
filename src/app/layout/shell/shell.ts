@@ -9,4 +9,14 @@ import { RouterModule } from '@angular/router';
   templateUrl: './shell.html',
   styleUrls: ['./shell.scss']
 })
-export class Shell {}
+export class Shell {
+  isMenuVisible = false;
+
+  toggleMenu() {
+    this.isMenuVisible = !this.isMenuVisible;
+  }
+
+  closeMenu() {
+    this.isMenuVisible = false;
+  }
+}
