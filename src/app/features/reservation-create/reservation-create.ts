@@ -33,7 +33,11 @@ export class ReservationCreate {
 
   calendarYear = new Date().getFullYear();
   calendarMonth = new Date().getMonth();
-
+  
+get calendarMonthName(): string {
+  return new Date(this.calendarYear, this.calendarMonth)
+    .toLocaleString('default', { month: 'long' });
+}
   loading = false;
   success = false;
 
@@ -80,6 +84,7 @@ export class ReservationCreate {
     });
   }, 800);
   }
+
 }
 export function noPastDate(control: AbstractControl): ValidationErrors | null {
   if (!control.value) return null;
