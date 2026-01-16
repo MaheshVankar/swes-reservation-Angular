@@ -165,8 +165,6 @@ applyPagination() {
   this.paged = this.filtered.slice(start, start + this.pageSize);
   setTimeout(() => this.adjustTableHeight());
 
-  console.log('PAGE SIZE', this.pageSize);
-  console.log('PAGED DATA', this.paged);
 }
 
   resetPage() {

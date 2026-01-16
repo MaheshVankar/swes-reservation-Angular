@@ -41,6 +41,7 @@
     &.show-menu {
       display: flex;
       z-index: 10;
+      gap: 10px !important;
     }
     .nav-item {
         margin-bottom: 10px;

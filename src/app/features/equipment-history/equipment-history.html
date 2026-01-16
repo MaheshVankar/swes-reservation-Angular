@@ -44,7 +44,7 @@
         (change)="onEndDateChange($any($event.target).value)">
     </div>
  <!-- ================= STATUS FILTERS (ALWAYS VISIBLE) ================= -->
-  <div class="align-items-center d-flex justify-content-end col-md-3">
+  <div class="align-items-center d-flex justify-content-end col-md-3 text-center">
     <label class="me-3">
       <input
         type="checkbox"
@@ -153,7 +153,7 @@
           <p>
             <strong>Status:</strong>
             <span
-              class="badge"
+              class="badge ms-1"
               [class.bg-success]="row.status === 'Returned'"
               [class.bg-warning]="row.status === 'Pending'"
               [class.bg-danger]="row.status === 'Overdue'">
